@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+*.env
+
+# Data and models (ignore large files during dev)
+*.csv
+*.pkl
+
+# Misc
+.DS_Store
+*.log
