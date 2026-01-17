@@ -12,7 +12,7 @@ venv/
 
 # Data and models (ignore large files during dev)
 *.csv
-*.pkl
+
 
 # Misc
 .DS_Store
