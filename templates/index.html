@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Ethnicity Predictor</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: auto;
+      background: #ffffff;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .form-row label {
+      width: 160px;
+      font-weight: bold;
+    }
+
+    .form-row input {
+      flex: 1;
+      padding: 6px 8px;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    .prediction {
+      margin-top: 25px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      color: #2e7d32;   /* green for positive feel */
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+  <script>
+    function clearPrediction() {
+      document.getElementById("prediction").innerText = "";
+    }
+  </script>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Predict Student Race/Ethnicity Group</h2>
+
+  <form action="{{ url_for('predict') }}" method="POST">
+
+    <div class="form-row">
+      <label>Math Score</label>
+      <input type="number" min="0" max="100" step="1" name="math_score"
+             value="{{ values.get('math_score', '') }}"
+             oninput="clearPrediction()" required>
+    </div>
+
+    <div class="form-row">
+      <label>Reading Score</label>
+      <input type="number" min="0" max="100" step="1" name="reading_score"
+             value="{{ values.get('reading_score', '') }}"
+             oninput="clearPrediction()" required>
+    </div>
+
+    <div class="form-row">
+      <label>Writing Score</label>
+      <input type="number" min="0" max="100" step="1" name="writing_score"
+             value="{{ values.get('writing_score', '') }}"
+             oninput="clearPrediction()" required>
+    </div>
+
+    <button class="btn" type="submit">Predict Group</button>
+  </form>
+
+  <div id="prediction" class="prediction">
+    {% if prediction %}
+      Predicted Group: {{ prediction }}
+    {% endif %}
+  </div>
+
+
+</div>
+
+</body>
+</html>
